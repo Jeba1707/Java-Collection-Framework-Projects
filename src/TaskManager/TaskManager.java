@@ -1,23 +1,21 @@
 package TaskManager;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.util.*;
 
 public class TaskManager {
-   public HashMap<String,Task> taskMap = new HashMap<>();
 
-    public void addTask(Task task){
+    public HashMap<String,Task> taskMap = new HashMap<>();
+
+    public String addTask(Task task){
     taskMap.put(task.getName(),task);
+     return "Task:"+task.getName()+" Description:"+task.getDescription()+" Due Date:"+task.getDueDate()+" Status:"+task.getStatus();
     }
 
     public void viewTasks(){
         taskMap.forEach((key,val)->{
-            String status ;
-            if(val.isCompletionStatus()==false){
-                status = "Pending";
-            }else
-                status = "Completed";
-
-            System.out.print("Task:"+key+" Description:"+val.getDescription()+" Due Date:"+val.getDueDate()+" Status:"+status);
+            System.out.print("Task:"+key+" Description:"+val.getDescription()+" Due Date:"+val.getDueDate()+" Status:"+val.getStatus());
             System.out.println();
         });
     }

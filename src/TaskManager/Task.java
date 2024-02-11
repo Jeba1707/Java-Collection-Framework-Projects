@@ -9,11 +9,30 @@ public class Task {
    private String dueDate;
    private  boolean completionStatus;
 
+   private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean completionStatus) {
+        if(isCompletionStatus()==false){
+            this.status = "Pending";
+        }else
+            this.status = "Completed";
+    }
+
     public Task(String name, String description, String dueDate) {
         this.name = name;
         this.description = description;
         this.dueDate = dueDate;
-       completionStatus = false;
+       setCompletionStatus(false);
+       setStatus(false);
+    }
+
+    public Task() {
+        setCompletionStatus(false);
+        setStatus(false);
     }
 
     public String getName() {
@@ -39,6 +58,7 @@ public class Task {
 
     public void setCompletionStatus(boolean completionStatus) {
         this.completionStatus = completionStatus;
+        setStatus(completionStatus);
     }
 
     public String getDueDate() {
