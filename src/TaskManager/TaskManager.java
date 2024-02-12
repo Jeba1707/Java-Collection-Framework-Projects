@@ -1,7 +1,5 @@
 package TaskManager;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.util.*;
 
 public class TaskManager {
@@ -20,35 +18,26 @@ public class TaskManager {
         });
     }
 
-    public void completeTask(String taskName){
-        int count = 1;
+    public String completeTask(String taskName){
+
         for(Map.Entry<String,Task> entry:taskMap.entrySet()){
             if (taskName.equalsIgnoreCase(entry.getKey())) {
                 entry.getValue().setCompletionStatus(true);
-                count++;
-                break;
+                return entry.getKey();
             }
         }
-        if(count>1){
-            System.out.println("Congrats! Your given task is completed");
-        }else
-            System.out.println("No task found , Entered wrong task name.");
+        return " ";
     }
 
-    public void deleteTask(String taskName) {
-        int count = 1;
+    public String deleteTask(String taskName) {
+
         for (Map.Entry<String, Task> entry : taskMap.entrySet()) {
             if (taskName.equalsIgnoreCase(entry.getKey())) {
                 taskMap.remove(entry.getKey());
-                count++;
-                break;
+                return entry.getKey();
             }
         }
-            if (count > 1) {
-                System.out.println("Your given task is deleted");
-            } else
-                System.out.println("No task found , Entered wrong task name.");
-        }
-
+        return " ";
+    }
 
 }

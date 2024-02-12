@@ -1,2 +1,5 @@
-Task:ee Description:ee Due Date:ee Status:Pending
-Hello world
+*****Your Tasks to do*****
+----------------------------------------------------------------------------------------------
+Task:Complete HomeWork Description:Homework Due Date:20 Feb 2024 Status:Pending
+Task:Buy groceries Description:bread, butter Due Date:17 feb 2024 Status:Pending
+Task:Clean the house Description:cleaning Due Date:17 feb 2024 Status:Pending

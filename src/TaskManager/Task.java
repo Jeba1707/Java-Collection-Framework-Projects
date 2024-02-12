@@ -1,8 +1,5 @@
 package TaskManager;
 
-import java.time.LocalDate;
-
-
 public class Task {
    private String name;
    private String description;
