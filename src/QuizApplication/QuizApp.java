@@ -5,20 +5,21 @@ import ContactManagementSystem.Contact;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.TreeSet;
 
 public class QuizApp {
-    private  List<Question> allQuestion ;
+  //  private  List<Question> allQuestion ;
     private List<Question> gKquestions;
     private List<Question> historyquestions;
     private List<Question> mathquetions;
     private List<Question> foodquestions;
-
+    private  static Scanner sc = new Scanner(System.in);
     private String mathfile ;   private String gkfile ;   private String foodfile ;   private String historyfile ;
 
 
     public QuizApp(String mathfile,String gkfile,String foodfile,String historyfile) {
-        this.allQuestion=new ArrayList<>();
+
         this.gKquestions = new ArrayList<>();
         this.historyquestions = new ArrayList<>();
         this.mathquetions = new ArrayList<>();
@@ -50,18 +51,64 @@ public class QuizApp {
 
     }
 
-    public void viewGKQuetions() {
-        System.out.println("GKQues");
-       loadGKQuesFromFile();
-
-        if (gKquestions.isEmpty()) {
+    public int generateQuetions(List<Question> list) {
+        int score = 0;
+        int count = 0;
+        if (list.isEmpty()) {
             System.out.println("No question available.");
         } else {
             System.out.println("Questions:");
-            for (Question question : gKquestions) {
-                System.out.println(question.getQuestion());
+            for (Question question : list) {
+                if(question.getTypeOfQues().equalsIgnoreCase("mcq")){
+                count++;
+                System.out.println(count + "." + question.getQuestion());
+                System.out.println(question.getOption1() + "\t" + question.getOption2() + "\t" + question.getOption3());
+                System.out.print("Ans :");
+                String ans = sc.nextLine();
+
+                if (ans.equalsIgnoreCase(question.getCorrectAns())) {
+                    System.out.println("Correct answer");
+                    System.out.println();
+                    score++;
+                } else {
+                    System.out.println("Wrong Answer.Correct Option is " + question.getCorrectAns());
+                    System.out.println();
+                }} else if (question.getTypeOfQues().equalsIgnoreCase("boolean")) {
+                    count++;
+                    System.out.println(count + "." + question.getQuestion());
+                    System.out.print("Ans :");
+                    String ans = sc.nextLine();
+
+                    if (ans.equalsIgnoreCase(question.getCorrectAns())) {
+                        System.out.println("Correct answer");
+                        System.out.println();
+                        score++;
+                    } else {
+                        System.out.println("Wrong Answer.Correct Option is " + question.getCorrectAns());
+                        System.out.println();
+                    }
+                }
             }
         }
+        return score;
+    }
+
+    public int startTest(String topic){
+        int score = 0;
+      if(topic.equalsIgnoreCase("GK")){
+          loadGKQuesFromFile();
+          score  = generateQuetions(gKquestions);
+      } else if (topic.equalsIgnoreCase("Math")) {
+          loadMathQuesFromFile();
+        score =   generateQuetions(mathquetions);
+      }else if (topic.equalsIgnoreCase("History")) {
+         loadHistoryQuesFromFile();
+         score =  generateQuetions(historyquestions);
+      }else if (topic.equalsIgnoreCase("Food")) {
+          loadFoodQuesFromFile();
+         score =  generateQuetions(foodquestions);
+      }
+      return score;
     }
     public void viewFoodQuetions() {
         System.out.println("FoodQues");
